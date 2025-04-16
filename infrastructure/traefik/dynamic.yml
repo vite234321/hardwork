@@ -1,0 +1,21 @@
+http:
+  routers:
+    data-collector:
+      rule: "Host(api.example.com)"
+      service: data-collector
+      entryPoints:
+        - web
+    telegram-bot:
+      rule: "Host(bot.example.com)"
+      service: telegram-bot
+      entryPoints:
+        - web
+  services:
+    data-collector:
+      loadBalancer:
+        servers:
+          - url: "http://data-collector:8000"
+    telegram-bot:
+      loadBalancer:
+        servers:
+          - url: "http://telegram-bot:8001"

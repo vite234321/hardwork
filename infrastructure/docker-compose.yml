@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  data-collector:
+    build: ../data-collector
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - app-network
+
+  telegram-bot:
+    build: ../telegram-bot
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - BOT_TOKEN=${BOT_TOKEN}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
